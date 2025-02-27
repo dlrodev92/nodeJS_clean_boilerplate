@@ -3,6 +3,7 @@ node_modules/
 dist/
 *.log
 .env
+.env.production
 
 # 🚀 TypeScript Build Files
 *.tsbuildinfo
