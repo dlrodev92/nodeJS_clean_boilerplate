@@ -1,0 +1,22 @@
+# 🚀 Node.js
+node_modules/
+dist/
+*.log
+.env
+
+# 🚀 TypeScript Build Files
+*.tsbuildinfo
+
+# 🚀 Prisma (Database Migrations & Generated Client)
+prisma/migrations/
+prisma/dev.db
+prisma/dev.db-journal
+
+# 🚀 Docker
+postgres_data/
+docker-compose.override.yml
+
+# 🚀 VSCode & OS-specific Files
+.vscode/
+.DS_Store
+Thumbs.db
