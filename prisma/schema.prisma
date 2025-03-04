@@ -17,34 +17,29 @@ model User {
   id        String @id @default(uuid())
   name      String
   email     String @unique
-  password  String
-  pets      Pet[]
-  appointments Appointment[]
+  password  String ? //optional for auth0 users
+  roleId    String  
+  role      Role    @relation(fields: [roleId], references: [id])
+  sessions  Session[]
 }
 
-model Pet {
-  id       String @id @default(uuid())
-  name     String
-  type     String
-  owner    User   @relation(fields: [ownerId], references: [id])
-  ownerId  String
-  appointments Appointment[]
+model Role {
+  id    String  @id @default(uuid())
+  name  RoleEnum @unique
+  users User[]
 }
 
-model Vet {
-  id            String @id @default(uuid())
-  name          String
-  specialization String
-  appointments  Appointment[]
+enum RoleEnum {
+  ADMIN
+  VET
+  USER
 }
 
-model Appointment {
-  id         String @id @default(uuid())
-  pet        Pet   @relation(fields: [petId], references: [id])
-  petId      String
-  vet        Vet   @relation(fields: [vetId], references: [id])
-  vetId      String
-  user       User  @relation(fields: [userId], references: [id])
-  userId     String
-  date       DateTime
+model Session {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  ipAddress String?  
+  userAgent String?  
+  createdAt DateTime @default(now())
 }
